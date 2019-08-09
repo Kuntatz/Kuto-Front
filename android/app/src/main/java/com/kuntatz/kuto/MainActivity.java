@@ -1,4 +1,4 @@
-package com.kuto;
+package com.kuntatz.kuto;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
