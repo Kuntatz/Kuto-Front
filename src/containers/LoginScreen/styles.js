@@ -31,6 +31,11 @@ export const styles = StyleSheet.create({
   bottomContainer: {
     height: Metrics.buttonHeight,
     backgroundColor: Color.primary,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 100
   },
   whiteText: {
     color: Color.white,

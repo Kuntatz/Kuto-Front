@@ -35,6 +35,7 @@ class LoginScreen extends Component {
 
   onSignIn = () => {
     Keyboard.dismiss();
+    this.props.navigation.navigate('MainStack');
   }
 
   onCreateAccount = () => {
@@ -91,7 +92,6 @@ class LoginScreen extends Component {
                 </Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.space} />
             <View style={styles.bottomContainer}>
               <TouchableOpacity onPress={this.onSignIn} style={styles.signInBtnContainer}>
                 <Text style={styles.whiteText}>SIGN IN</Text>
