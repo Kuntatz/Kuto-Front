@@ -19,6 +19,9 @@
 		31E5ADA501F3CFA7A687BA97 /* libPods-Kuto-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A90CFE9A9FF2EE2B85B6DCA4 /* libPods-Kuto-tvOSTests.a */; };
 		62A858FA7BC5D8D199BEE76F /* libPods-KutoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 955BE87E4C39472A7084B6E8 /* libPods-KutoTests.a */; };
 		9C3DE44A308356434A347ACA /* libPods-Kuto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B75D5BB9C7B5DC77B1600A94 /* libPods-Kuto.a */; };
+		CEA5BFF622FDF4F60084F200 /* img_splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA5BFF322FDF4F60084F200 /* img_splash@2x.png */; };
+		CEA5BFF722FDF4F60084F200 /* img_splash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA5BFF422FDF4F60084F200 /* img_splash@3x.png */; };
+		CEA5BFF822FDF4F60084F200 /* img_splash.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA5BFF522FDF4F60084F200 /* img_splash.png */; };
 		D76077A4FED91041A9BB437C /* libPods-Kuto-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF0A56C0E8DADD7F8995BE1 /* libPods-Kuto-tvOS.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,9 @@
 		9BBD97A121222EADCD5F40BC /* Pods-Kuto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuto.debug.xcconfig"; path = "Target Support Files/Pods-Kuto/Pods-Kuto.debug.xcconfig"; sourceTree = "<group>"; };
 		A90CFE9A9FF2EE2B85B6DCA4 /* libPods-Kuto-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kuto-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75D5BB9C7B5DC77B1600A94 /* libPods-Kuto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kuto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEA5BFF322FDF4F60084F200 /* img_splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_splash@2x.png"; path = "../src/assets/img_splash@2x.png"; sourceTree = "<group>"; };
+		CEA5BFF422FDF4F60084F200 /* img_splash@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_splash@3x.png"; path = "../src/assets/img_splash@3x.png"; sourceTree = "<group>"; };
+		CEA5BFF522FDF4F60084F200 /* img_splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_splash.png; path = ../src/assets/img_splash.png; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F5E60ACB18ED1C9055F9E03F /* Pods-Kuto-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuto-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Kuto-tvOS/Pods-Kuto-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 		13B07FAE1A68108700A75B9A /* Kuto */ = {
 			isa = PBXGroup;
 			children = (
+				CEA5BFF922FDF5010084F200 /* resources */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -161,7 +168,6 @@
 				30C51DB7D5F0FD456540CF63 /* Pods-KutoTests.debug.xcconfig */,
 				FB8368D205B8763EEE929CEC /* Pods-KutoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -196,6 +202,16 @@
 				2D02E4901E0B4A5D006451C7 /* Kuto-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CEA5BFF922FDF5010084F200 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				CEA5BFF522FDF4F60084F200 /* img_splash.png */,
+				CEA5BFF322FDF4F60084F200 /* img_splash@2x.png */,
+				CEA5BFF422FDF4F60084F200 /* img_splash@3x.png */,
+			);
+			name = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +354,9 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				CEA5BFF622FDF4F60084F200 /* img_splash@2x.png in Resources */,
+				CEA5BFF722FDF4F60084F200 /* img_splash@3x.png in Resources */,
+				CEA5BFF822FDF4F60084F200 /* img_splash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

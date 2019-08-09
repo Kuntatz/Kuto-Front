@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
-  KeyboardAvoidingView,
   Keyboard
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen'
 import { styles } from './styles';
 import { CommonStyles, Color } from '../../themes';
 
@@ -21,6 +21,12 @@ class LoginScreen extends Component {
       userName: '',
       password: ''
     }
+  }
+
+  componentDidMount() {
+    this.timeOut = setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000 * 1.5);
   }
 
   onChangeText = (stateName, value) => {
