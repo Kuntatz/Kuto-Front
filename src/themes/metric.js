@@ -5,6 +5,6 @@ const { width, height } = Dimensions.get('window');
 export default {
   width,
   height,
-  buttonHeight: 50,
+  buttonHeight: 45,
   marginHorizontal: 20
 }

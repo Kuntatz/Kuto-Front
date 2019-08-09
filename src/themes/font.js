@@ -3,7 +3,7 @@ export default {
     h1: 65,
     h4: 49,
     h6: 33,
-    button: 32,
+    button: 24,
     medium: 15,
     input: 15,
     small: 12,
