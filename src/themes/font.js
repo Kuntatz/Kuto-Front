@@ -8,5 +8,6 @@ export default {
     input: 15,
     small: 12,
     regular: 17,
+    large: 20
   }
 }

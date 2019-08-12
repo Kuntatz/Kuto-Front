@@ -6,7 +6,8 @@ import {
 } from 'react-navigation';
 import {
   LoginScreen,
-  HomeScreen
+  HomeScreen,
+  ConfirmScreen
 } from './containers';
 
 const AuthStack = createStackNavigator({
@@ -17,9 +18,10 @@ const AuthStack = createStackNavigator({
 });
 
 const MainStack = createStackNavigator({
-  HomeScreen: HomeScreen
+  HomeScreen: HomeScreen,
+  ConfirmScreen: ConfirmScreen
 }, {
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'ConfirmScreen',
   headerMode: 'none'
 });
 
@@ -27,7 +29,7 @@ const routing = createSwitchNavigator({
   AuthStack: AuthStack,
   MainStack: MainStack
 }, {
-  initialRouteName: 'AuthStack',
+  initialRouteName: 'MainStack',
   headerMode: ''
 });
 

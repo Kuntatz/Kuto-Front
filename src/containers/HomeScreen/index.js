@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
 import { Text, Image, TouchableOpacity, View } from 'react-native';
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-splash-screen';
 import { styles } from './styles';
 import { CommonStyles } from '../../themes';
 
@@ -26,7 +26,7 @@ class HomeScreen extends Component {
   }
 
   onUpload = () => {
-    alert('upload');
+    this.props.navigation.navigate('ConfirmScreen');
   }
 
   render() {
@@ -55,12 +55,12 @@ class HomeScreen extends Component {
               </View>
             </View>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.smallBtnSubContainer} onPress={this.onUpload}>
-                  <Text style={styles.primaryText}>
-                    Upload
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity style={styles.smallBtnSubContainer} onPress={this.onUpload}>
+                <Text style={styles.primaryText}>
+                  Upload
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </SafeAreaView>
