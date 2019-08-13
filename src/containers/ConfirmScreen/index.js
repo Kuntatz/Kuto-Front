@@ -22,10 +22,6 @@ class ConfirmScreen extends Component {
     }
   }
 
-  componentDidMount() {
-    SplashScreen.hide();
-  }
-
   onChangeText = (text, index, property) => {
     const { inputFields } = this.state;
     const updatedInputFields = _.cloneDeep(inputFields);

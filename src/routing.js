@@ -21,7 +21,7 @@ const MainStack = createStackNavigator({
   HomeScreen: HomeScreen,
   ConfirmScreen: ConfirmScreen
 }, {
-  initialRouteName: 'ConfirmScreen',
+  initialRouteName: 'HomeScreen',
   headerMode: 'none'
 });
 
