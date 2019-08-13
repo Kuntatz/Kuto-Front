@@ -16,6 +16,7 @@ class HomeScreen extends Component {
       recording: false,
       stoppedRecording: false,
       finished: false,
+      paused: false,
     }
   }
 
@@ -100,11 +101,52 @@ class HomeScreen extends Component {
     }
   }
 
+  onPause = async () => {
+    if (!this.state.recording) {
+      console.warn('Can\'t pause, not recording!');
+      return;
+    }
+
+    try {
+      const filePath = await AudioRecorder.pauseRecording();
+      this.setState({ paused: true });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  onResume = async () => {
+    if (!this.state.paused) {
+      console.warn('Can\'t resume, not paused!');
+      return;
+    }
+
+    try {
+      await AudioRecorder.resumeRecording();
+      this.setState({ paused: false });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   onUpload = () => {
     this.props.navigation.navigate('ConfirmScreen');
   }
 
   render() {
+    const { recording, paused, stoppedRecording } = this.state;
+    let btnName = '';
+    let onPress = null;
+    if (recording && paused) {
+      btnName = 'Resume';
+      onPress = this.onResume;
+    } else if (recording && !paused) {
+      btnName = 'Pause';
+      onPress = this.onPause;
+    } else if (!recording && !paused) {
+      btnName = 'Start';
+      onPress = this.onStart;
+    }
     return (
       <SafeAreaView style={CommonStyles.container}>
         <View style={styles.container}>
@@ -115,9 +157,9 @@ class HomeScreen extends Component {
           <View style={styles.buttonsContainer}>
             <View style={styles.subBtnsContainer}>
               <View style={styles.smallBtnContainer}>
-                <TouchableOpacity style={styles.smallBtnSubContainer} onPress={this.onStart}>
+                <TouchableOpacity style={styles.smallBtnSubContainer} onPress={onPress}>
                   <Text style={styles.primaryText}>
-                    Start
+                    {btnName}
                   </Text>
                 </TouchableOpacity>
               </View>
