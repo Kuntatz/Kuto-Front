@@ -29,7 +29,7 @@ const routing = createSwitchNavigator({
   AuthStack: AuthStack,
   MainStack: MainStack
 }, {
-  initialRouteName: 'MainStack',
+  initialRouteName: 'AuthStack',
   headerMode: ''
 });
 
