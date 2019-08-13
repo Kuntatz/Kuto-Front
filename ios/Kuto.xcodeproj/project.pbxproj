@@ -19,6 +19,7 @@
 		31E5ADA501F3CFA7A687BA97 /* libPods-Kuto-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A90CFE9A9FF2EE2B85B6DCA4 /* libPods-Kuto-tvOSTests.a */; };
 		62A858FA7BC5D8D199BEE76F /* libPods-KutoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 955BE87E4C39472A7084B6E8 /* libPods-KutoTests.a */; };
 		9C3DE44A308356434A347ACA /* libPods-Kuto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B75D5BB9C7B5DC77B1600A94 /* libPods-Kuto.a */; };
+		CE4700DE2302EF7D005836F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE4700DD2302EF7D005836F1 /* GoogleService-Info.plist */; };
 		CEA5BFF622FDF4F60084F200 /* img_splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA5BFF322FDF4F60084F200 /* img_splash@2x.png */; };
 		CEA5BFF722FDF4F60084F200 /* img_splash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA5BFF422FDF4F60084F200 /* img_splash@3x.png */; };
 		CEA5BFF822FDF4F60084F200 /* img_splash.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA5BFF522FDF4F60084F200 /* img_splash.png */; };
@@ -66,6 +67,7 @@
 		9BBD97A121222EADCD5F40BC /* Pods-Kuto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuto.debug.xcconfig"; path = "Target Support Files/Pods-Kuto/Pods-Kuto.debug.xcconfig"; sourceTree = "<group>"; };
 		A90CFE9A9FF2EE2B85B6DCA4 /* libPods-Kuto-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kuto-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75D5BB9C7B5DC77B1600A94 /* libPods-Kuto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kuto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4700DD2302EF7D005836F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Kuto/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEA5BFF322FDF4F60084F200 /* img_splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_splash@2x.png"; path = "../src/assets/img_splash@2x.png"; sourceTree = "<group>"; };
 		CEA5BFF422FDF4F60084F200 /* img_splash@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_splash@3x.png"; path = "../src/assets/img_splash@3x.png"; sourceTree = "<group>"; };
 		CEA5BFF522FDF4F60084F200 /* img_splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_splash.png; path = ../src/assets/img_splash.png; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				CE4700DD2302EF7D005836F1 /* GoogleService-Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -324,6 +327,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -357,6 +361,7 @@
 				CEA5BFF622FDF4F60084F200 /* img_splash@2x.png in Resources */,
 				CEA5BFF722FDF4F60084F200 /* img_splash@3x.png in Resources */,
 				CEA5BFF822FDF4F60084F200 /* img_splash.png in Resources */,
+				CE4700DE2302EF7D005836F1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
