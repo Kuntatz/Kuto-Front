@@ -5,6 +5,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
 import { styles } from './styles';
 import { CommonStyles } from '../../themes';
+import { FirebaseUtils } from '../../utils';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class HomeScreen extends Component {
       stoppedRecording: false,
       finished: false,
       paused: false,
+      completed: false
     }
   }
 
@@ -87,7 +89,12 @@ class HomeScreen extends Component {
       return;
     }
 
-    this.setState({ stoppedRecording: true, recording: false, paused: false });
+    this.setState({
+      stoppedRecording: true, 
+      recording: false, 
+      paused: false,
+      completed: true
+    });
 
     try {
       const filePath = await AudioRecorder.stopRecording();
@@ -129,8 +136,22 @@ class HomeScreen extends Component {
     }
   }
 
-  onUpload = () => {
-    this.props.navigation.navigate('ConfirmScreen');
+  onUpload = async() => {
+    const { audioPath, completed } = this.state;
+    this.props.navigation.navigate('ConfirmScreen', {
+      audioURL: 'https://firebasestorage.googleapis.com/v0/b/testkuto.appspot.com/o/audios%2F55a364c0-be0b-11e9-8b5e-b315745382e9.aac?alt=media&token=ea83f2d2-f363-4684-b08e-057b8daf34cc',
+      duration: 9
+    });
+    // if (completed) {
+    //   try {
+    //     const downloadURL = await FirebaseUtils.uploadAudioFile(audioPath);
+    //     console.info('downloadURL', downloadURL);
+    //   } catch (e) {
+    //     console.info('e upload', e);
+    //   }
+    // } else {
+    //   alert('not ready to upload it');
+    // }
   }
 
   render() {
