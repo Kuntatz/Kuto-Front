@@ -5,7 +5,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
 import { styles } from './styles';
 import { CommonStyles } from '../../themes';
-import { FirebaseUtils } from '../../utils';
+import { User, showAlert } from '../../utils';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -43,6 +43,18 @@ class HomeScreen extends Component {
       };
     });
   }
+
+  onInitial = () => {
+    this.setState({
+      hasPermission: undefined,
+      currentTime: 0.0,
+      recording: false,
+      stoppedRecording: false,
+      finished: false,
+      paused: false,
+      completed: false
+    });
+  };
 
   _finishRecording = (didSucceed, filePath, fileSize) => {
     this.setState({ finished: didSucceed });
@@ -137,21 +149,17 @@ class HomeScreen extends Component {
   }
 
   onUpload = async() => {
-    const { audioPath, completed } = this.state;
-    this.props.navigation.navigate('ConfirmScreen', {
-      audioURL: 'https://firebasestorage.googleapis.com/v0/b/testkuto.appspot.com/o/audios%2F55a364c0-be0b-11e9-8b5e-b315745382e9.aac?alt=media&token=ea83f2d2-f363-4684-b08e-057b8daf34cc',
-      duration: 9
-    });
-    // if (completed) {
-    //   try {
-    //     const downloadURL = await FirebaseUtils.uploadAudioFile(audioPath);
-    //     console.info('downloadURL', downloadURL);
-    //   } catch (e) {
-    //     console.info('e upload', e);
-    //   }
-    // } else {
-    //   alert('not ready to upload it');
-    // }
+    const { audioPath, completed, currentTime } = this.state;
+    if (completed) {
+      try {
+        this.onInitial();
+        this.props.navigation.navigate('ConfirmScreen', { audioPath, duration: currentTime });
+      } catch (e) {
+        console.info('e upload', e);
+      }
+    } else {
+      showAlert('KUTO', 'Sorry, it is not ready to upload');
+    }
   }
 
   render() {
@@ -172,7 +180,7 @@ class HomeScreen extends Component {
       <SafeAreaView style={CommonStyles.container}>
         <View style={styles.container}>
           <Text style={styles.headerText}>
-            {`Hello\nUsername.`}
+            {`Hello\n${User.getMe().displayName || ''}.`}
           </Text>
           <Image source={require('../../assets/icon_microphone.png')} style={styles.iconMicrophone} />
           <View style={styles.buttonsContainer}>
