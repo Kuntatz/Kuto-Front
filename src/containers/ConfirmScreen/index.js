@@ -6,7 +6,7 @@ import SplashScreen from 'react-native-splash-screen';
 import _ from 'lodash';
 import { styles } from './styles';
 import { CommonStyles } from '../../themes';
-import { FirebaseUtils, User } from '../../utils';
+import { FirebaseUtils, User, showAlert } from '../../utils';
 
 class ConfirmScreen extends Component {
   constructor(props) {
@@ -55,17 +55,22 @@ class ConfirmScreen extends Component {
     const res = this.validateFields();
     if (res.isValid) {
       if (User.getMe()) {
-        await FirebaseUtils.setAudioInfo(
-          User.getMe().uid, 
+        const downloadURL = await FirebaseUtils.uploadAudioFile(navigation.state.params.audioPath);
+        console.info('downloadURL', downloadURL);
+        const result = await FirebaseUtils.setAudioInfo(
+          User.getMe().uid,
           navigation.state.params.duration,
           res.fields,
-          navigation.state.params.audioURL,
+          downloadURL,
           User.getMe().displayName,
           User.getMe().email
         );
+        if (result) {
+          this.props.navigation.goBack();
+        }
       }
     } else {
-      alert('please fill the empty fields');
+      showAlert('KUTO', 'Please fill the empty fields.');
     }
   }
 
@@ -110,7 +115,7 @@ class ConfirmScreen extends Component {
       <SafeAreaView style={CommonStyles.container}>
         <KeyboardAwareScrollView style={styles.container}>
           <Text style={styles.headerText}>
-            {`Good Work\nUsername.`}
+            {`Good Work\n${User.getMe().displayName || ''}.`}
           </Text>
           {_.map(_.range(0, addedIndex), (value, index) => {
             return this.renderField(index);
