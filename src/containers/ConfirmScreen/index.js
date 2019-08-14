@@ -6,6 +6,7 @@ import SplashScreen from 'react-native-splash-screen';
 import _ from 'lodash';
 import { styles } from './styles';
 import { CommonStyles } from '../../themes';
+import { FirebaseUtils, User } from '../../utils';
 
 class ConfirmScreen extends Component {
   constructor(props) {
@@ -30,9 +31,42 @@ class ConfirmScreen extends Component {
     this.setState({ inputFields: updatedInputFields });
   }
 
-  onConfirm = () => {
+  validateFields = () => {
+    const { addedIndex, inputFields } = this.state;
+    let isValid = true;
+    const fields = [];
+    for(let index = 0; index < addedIndex; index += 1) {
+      if (!(inputFields[index].restaurantName && inputFields[index].restaurantName !== '' &&
+        inputFields[index].promoCode && inputFields[index].promoCode !== '')) {
+          isValid = false;
+      } else {
+        fields.push(inputFields[index]);
+      }
+    }
+    if (isValid) {
+      return ({ isValid, fields });
+    }
+    return ({ isValid });
+  }
+
+  onConfirm = async () => {
     const { inputFields } = this.state;
-    console.info('inputFields', inputFields);
+    const { navigation } = this.props;
+    const res = this.validateFields();
+    if (res.isValid) {
+      if (User.getMe()) {
+        await FirebaseUtils.setAudioInfo(
+          User.getMe().uid, 
+          navigation.state.params.duration,
+          res.fields,
+          navigation.state.params.audioURL,
+          User.getMe().displayName,
+          User.getMe().email
+        );
+      }
+    } else {
+      alert('please fill the empty fields');
+    }
   }
 
   onAddField = () => {
