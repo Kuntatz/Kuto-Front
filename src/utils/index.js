@@ -1,4 +1,4 @@
-import * as firebase from './firebase';
+import * as FirebaseUtils from './firebase';
 import { Alert } from 'react-native';
 
 let currentUser = null;
@@ -24,7 +24,7 @@ const showAlert = (title = 'KUTO', message, onPress = () => null) => {
 };
 
 export {
-  firebase,
+  FirebaseUtils,
   User,
   showAlert
 }

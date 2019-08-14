@@ -13,7 +13,7 @@ import {
 import SplashScreen from 'react-native-splash-screen'
 import { styles } from './styles';
 import { CommonStyles, Color } from '../../themes';
-import { firebase, User, showAlert } from '../../utils';
+import { FirebaseUtils, User, showAlert } from '../../utils';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -36,14 +36,14 @@ class LoginScreen extends Component {
 
   onSignIn = async () => {
     Keyboard.dismiss();
-    const res = await firebase.signIn();
+    const res = await FirebaseUtils.signIn();
     if (res.success) {
       this.props.navigation.navigate('MainStack');
     } else {
       showAlert('KUTO', 'Your credential does not match. please try again later.');
     }
     console.info('User.getMe', User.getMe());
-    console.info('getIdToken', await firebase.getIdToken());
+    console.info('getIdToken', await FirebaseUtils.getIdToken());
   }
 
   onCreateAccount = () => {
