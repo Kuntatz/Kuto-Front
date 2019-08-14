@@ -19,7 +19,7 @@ class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
+      email: '',
       password: ''
     }
   }
@@ -36,14 +36,21 @@ class LoginScreen extends Component {
 
   onSignIn = async () => {
     Keyboard.dismiss();
-    const res = await FirebaseUtils.signIn();
+    const { email, password } = this.state;
+    if (email === '') {
+      return showAlert('KUTO', 'Please type the email address.');
+    }
+    if (password === '') {
+      return showAlert('KUTO', 'Please type the password.');
+    }
+    const res = await FirebaseUtils.signIn(email, password);
     if (res.success) {
       this.props.navigation.navigate('MainStack');
     } else {
       showAlert('KUTO', 'Your credential does not match. please try again later.');
     }
-    console.info('User.getMe', User.getMe());
-    console.info('getIdToken', await FirebaseUtils.getIdToken());
+    // console.info('User.getMe', User.getMe());
+    // console.info('getIdToken', await FirebaseUtils.getIdToken());
   }
 
   onCreateAccount = () => {
@@ -51,7 +58,7 @@ class LoginScreen extends Component {
   }
 
   render() {
-    const { userName, password } = this.state;
+    const { email, password } = this.state;
 
     return (
       <SafeAreaView style={CommonStyles.container}>
@@ -75,11 +82,11 @@ class LoginScreen extends Component {
                 <Image source={require('../../assets/icon_user.png')} style={styles.iconUser} />
                 <TextInput
                   style={styles.input}
-                  placeholder="Username"
+                  placeholder="Email"
                   placeholderTextColor={Color.gray}
                   underlineColorAndroid="transparent"
-                  value={userName}
-                  onChangeText={value => this.onChangeText('userName', value)}
+                  value={email}
+                  onChangeText={value => this.onChangeText('email', value)}
                 />
               </View>
               <View style={styles.inputContainer}>
