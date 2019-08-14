@@ -1,38 +1,38 @@
 {
   "project_info": {
-    "project_number": "452811716391",
-    "firebase_url": "https://testkuto.firebaseio.com",
-    "project_id": "testkuto",
-    "storage_bucket": "testkuto.appspot.com"
+    "project_number": "530021295130",
+    "firebase_url": "https://kuto-8c190.firebaseio.com",
+    "project_id": "kuto-8c190",
+    "storage_bucket": "kuto-8c190.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:452811716391:android:37c329db226e16b8",
+        "mobilesdk_app_id": "1:530021295130:android:37c329db226e16b8",
         "android_client_info": {
           "package_name": "com.kuntatz.kuto"
         }
       },
       "oauth_client": [
         {
-          "client_id": "452811716391-imqtivf4bk3akuuk6i60u7fq5i1rbjeb.apps.googleusercontent.com",
+          "client_id": "530021295130-551njh513qm5kod981s629074dcit37e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDytwjqDDhewSizxMCIII5SHHkf5Qp61h4"
+          "current_key": "AIzaSyA01G7mp1BSFmSWnXKKtgPUCw3Q6Cl_bos"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "452811716391-imqtivf4bk3akuuk6i60u7fq5i1rbjeb.apps.googleusercontent.com",
+              "client_id": "530021295130-551njh513qm5kod981s629074dcit37e.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "452811716391-0jiakc4fejh0unebp8m4564rp75l9kuo.apps.googleusercontent.com",
+              "client_id": "530021295130-g8sgtrqd27bmc4d76dp2ka3e98ajkast.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.kuntatz.kuto"
