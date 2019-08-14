@@ -4,9 +4,9 @@ import { get } from 'lodash';
 import { User } from '../utils';
 
 const firestoreAudioRef = firebase.firestore().collection('audios');
-export const signIn = async () => {
+export const signIn = async (email, password) => {
   try {
-    const ret = await firebase.auth().signInWithEmailAndPassword('rati.kirvalidze10@gmail.com', 'Asdf!234');
+    const ret = await firebase.auth().signInWithEmailAndPassword(email, password);
     if (get(ret, 'user._user', null)) {
       User.setCurrentUser(get(ret, 'user._user', null));
     }
@@ -51,7 +51,6 @@ export const uploadAudioFile = async (audioUri) => {
 }
 
 export const setAudioInfo = async (uid, duration, restaurants, audioURL, userName, userEmail) => {
-  debugger;
   try {
     const res = await firestoreAudioRef.add({
       uid,
@@ -61,7 +60,6 @@ export const setAudioInfo = async (uid, duration, restaurants, audioURL, userNam
       audioURL,
       restaurants
     });
-    debugger;
     return res;
   } catch (e) {
     console.info('e setAudioInfo', e);
