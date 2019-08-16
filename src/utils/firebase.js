@@ -4,6 +4,15 @@ import { get } from 'lodash';
 import { User } from '../utils';
 
 const firestoreAudioRef = firebase.firestore().collection('audios');
+
+export const getCurrentUser = () => {
+  const currentUser = firebase.auth().currentUser;
+  if (currentUser) {
+    User.setCurrentUser(get(currentUser, '_user', null));
+    return currentUser.toJSON();
+  }
+  return null;
+}
 export const signIn = async (email, password) => {
   try {
     const ret = await firebase.auth().signInWithEmailAndPassword(email, password);
