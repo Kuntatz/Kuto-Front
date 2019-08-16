@@ -5,7 +5,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
 import { styles } from './styles';
 import { CommonStyles } from '../../themes';
-import { User, showAlert } from '../../utils';
+import { User, showAlert, FirebaseUtils } from '../../utils';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -46,7 +46,6 @@ class HomeScreen extends Component {
 
   onInitial = () => {
     this.setState({
-      hasPermission: undefined,
       currentTime: 0.0,
       recording: false,
       stoppedRecording: false,
@@ -79,6 +78,7 @@ class HomeScreen extends Component {
 
     if (!this.state.hasPermission) {
       console.warn('Can\'t record, no permission granted!');
+      showAlert('Kuto', 'Please allow the permission to record.');
       return;
     }
 
@@ -152,8 +152,8 @@ class HomeScreen extends Component {
     const { audioPath, completed, currentTime } = this.state;
     if (completed) {
       try {
-        this.onInitial();
         this.props.navigation.navigate('ConfirmScreen', { audioPath, duration: currentTime });
+        this.onInitial();
       } catch (e) {
         console.info('e upload', e);
       }
