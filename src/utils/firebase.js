@@ -36,7 +36,9 @@ export const getIdToken = async() => {
 };
 
 export const uploadAudioFile = async (audioUri) => {
-  const filename = `${uuid()}.aac`;
+  const name = User.getMe().displayName;
+  const time = new Date();
+  const filename = `${name}-${time.getTime()}.aac`;
   return new Promise((resolve, reject) => {
     firebase
     .storage()
@@ -59,19 +61,68 @@ export const uploadAudioFile = async (audioUri) => {
   });
 }
 
-export const setAudioInfo = async (uid, duration, restaurants, audioURL, userName, userEmail) => {
+export const getAudioInfo = async () => {
   try {
-    const res = await firestoreAudioRef.add({
+    const querySnapshot = await firestoreAudioRef.where('uid', '==', User.getMe().uid).get();
+    console.info('querySnapshot', querySnapshot);
+    if (querySnapshot.docs.length === 1) {
+      return {
+        data: querySnapshot.docs[0].data(), 
+        ref: querySnapshot.docs[0].ref
+      };
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.info('e', e);
+    return null;
+  }
+}
+
+export const updateAudioInfo = async (audioRef, currentAudios, duration, restaurants, audioURL) => {
+  const currentTime = new Date();
+  const audio = {
+    duration,
+    audioURL,
+    duration,
+    restaurants,
+    time: currentTime
+  }
+  const audios = [...currentAudios, audio];
+  try {
+    await audioRef.update({ audios, updatedTime: currentTime });
+    return ({ success: true });
+  } catch (e) {
+    console.info('e updateAudioInfo', e);
+    return ({ success: false });
+  }
+}
+
+export const setAudioInfo = async (duration, restaurants, audioURL) => {
+  const uid = User.getMe().uid;
+  const userName = User.getMe().displayName;
+  const userEmail = User.getMe().email;
+  const currentTime = new Date();
+
+  const audios = [{
+    audioURL,
+    duration,
+    restaurants,
+    time: currentTime
+  }];
+
+  try {
+    const res = await firestoreAudioRef.doc(`${userName}-${currentTime.getTime()}`).set({
       uid,
       userName,
       userEmail,
-      duration,
-      audioURL,
-      restaurants
+      audios,
+      updatedTime: currentTime
     });
-    return res;
+    debugger;
+    return { success: true };
   } catch (e) {
     console.info('e setAudioInfo', e);
-    return null;
+    return { success: false };
   }
 }
