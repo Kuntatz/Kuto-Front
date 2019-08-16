@@ -26,7 +26,12 @@ class LoginScreen extends Component {
 
   componentDidMount() {
     this.timeOut = setTimeout(() => {
-      SplashScreen.hide();
+      const res = FirebaseUtils.getCurrentUser();
+      if (res) {
+        this.props.navigation.navigate('MainStack');
+      } else {
+        SplashScreen.hide();
+      }
     }, 1000 * 1.5);
   }
 
@@ -38,16 +43,16 @@ class LoginScreen extends Component {
     Keyboard.dismiss();
     const { email, password } = this.state;
     if (email === '') {
-      return showAlert('KUTO', 'Please type the email address.');
+      return showAlert('Kuto', 'Please type the email address.');
     }
     if (password === '') {
-      return showAlert('KUTO', 'Please type the password.');
+      return showAlert('Kuto', 'Please type the password.');
     }
     const res = await FirebaseUtils.signIn(email, password);
     if (res.success) {
       this.props.navigation.navigate('MainStack');
     } else {
-      showAlert('KUTO', 'Your credential does not match. please try again later.');
+      showAlert('Kuto', 'Your credential does not match. please try again later.');
     }
     // console.info('User.getMe', User.getMe());
     // console.info('getIdToken', await FirebaseUtils.getIdToken());
