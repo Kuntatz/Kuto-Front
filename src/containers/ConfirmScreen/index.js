@@ -55,18 +55,40 @@ class ConfirmScreen extends Component {
     const res = this.validateFields();
     if (res.isValid) {
       if (User.getMe()) {
-        const downloadURL = await FirebaseUtils.uploadAudioFile(navigation.state.params.audioPath);
-        console.info('downloadURL', downloadURL);
-        const result = await FirebaseUtils.setAudioInfo(
-          User.getMe().uid,
-          navigation.state.params.duration,
-          res.fields,
-          downloadURL,
-          User.getMe().displayName,
-          User.getMe().email
-        );
-        if (result) {
-          this.props.navigation.goBack();
+        const audioURL = await FirebaseUtils.uploadAudioFile(navigation.state.params.audioPath);
+        const audioInfo = await FirebaseUtils.getAudioInfo();
+        if (audioInfo) {
+          const result = await FirebaseUtils.updateAudioInfo(
+            audioInfo.ref,
+            audioInfo.data.audios,
+            navigation.state.params.duration,
+            res.fields,
+            audioURL
+          );
+          console.info('result', result);
+          debugger;
+          if (result.success) {
+            showAlert('Kuto', 'Successfully uploaded.', () => {
+              this.props.navigation.goBack();
+            });
+          } else {
+            showAlert('Kuto', 'Failure to upload. please try again later.');
+          }
+        } else {
+          const result = await FirebaseUtils.setAudioInfo(
+            navigation.state.params.duration,
+            res.fields,
+            audioURL
+          );
+          console.info('result', result);
+          debugger;
+          if (result.success) {
+            showAlert('Kuto', 'Successfully uploaded.', () => {
+              this.props.navigation.goBack();
+            });
+          } else {
+            showAlert('Kuto', 'Failure to upload. please try again later.');
+          }
         }
       }
     } else {
