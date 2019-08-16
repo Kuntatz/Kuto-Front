@@ -70,7 +70,7 @@ class ConfirmScreen extends Component {
         }
       }
     } else {
-      showAlert('KUTO', 'Please fill the empty fields.');
+      showAlert('Kuto', 'Please fill the empty fields.');
     }
   }
 
