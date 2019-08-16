@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
-  Keyboard
+  Keyboard,
+  Linking
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen'
 import { styles } from './styles';
@@ -58,8 +59,14 @@ class LoginScreen extends Component {
     // console.info('getIdToken', await FirebaseUtils.getIdToken());
   }
 
-  onCreateAccount = () => {
+  onCreateAccount = async() => {
     Keyboard.dismiss();
+    const isSupported = await Linking.canOpenURL();
+    if (isSupported) {
+      return Linking.openURL('https://kuto.co/drivers/#join');
+    } else {
+      console.log("Can't handle url: " + url);
+    }
   }
 
   render() {
