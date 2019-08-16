@@ -195,7 +195,7 @@ class HomeScreen extends Component {
               <View style={styles.smallBtnContainer}>
                 <TouchableOpacity style={styles.smallBtnSubContainer} onPress={this.onStop}>
                   <Text style={styles.primaryText}>
-                    Stop
+                    End
                   </Text>
                 </TouchableOpacity>
               </View>
