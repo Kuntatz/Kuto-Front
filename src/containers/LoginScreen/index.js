@@ -61,9 +61,10 @@ class LoginScreen extends Component {
 
   onCreateAccount = async() => {
     Keyboard.dismiss();
-    const isSupported = await Linking.canOpenURL();
+    const url = 'https://kuto.co/drivers/#join';
+    const isSupported = await Linking.canOpenURL(url);
     if (isSupported) {
-      return Linking.openURL('https://kuto.co/drivers/#join');
+      return Linking.openURL(url);
     } else {
       console.log("Can't handle url: " + url);
     }
