@@ -4,6 +4,7 @@ import {
   createSwitchNavigator, 
   createStackNavigator 
 } from 'react-navigation';
+import { Platform } from 'react-native';
 import {
   LoginScreen,
   HomeScreen,
@@ -19,7 +20,12 @@ const AuthStack = createStackNavigator({
 
 const MainStack = createStackNavigator({
   HomeScreen: HomeScreen,
-  ConfirmScreen: ConfirmScreen
+  ConfirmScreen: {
+    screen: ConfirmScreen,
+    navigationOptions: {
+      gesturesEnabled: Platform.OS !== 'ios'
+    }
+  }
 }, {
   initialRouteName: 'HomeScreen',
   headerMode: 'none'

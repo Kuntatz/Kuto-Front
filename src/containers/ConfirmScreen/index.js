@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { View, Text, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ActivityIndicator, BackHandler } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SplashScreen from 'react-native-splash-screen';
 import _ from 'lodash';
@@ -22,6 +22,18 @@ class ConfirmScreen extends Component {
       ],
       showActivitiy: false
     }
+  }
+
+  componentDidMount() {
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+  }
+
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
+
+  handleBackPress = () => {
+    return true;
   }
 
   onChangeText = (text, index, property) => {
@@ -161,7 +173,7 @@ class ConfirmScreen extends Component {
   };
 
   render() {
-    const { addedIndex, showActivitiy } = this.state;
+    const { addedIndex } = this.state;
     return (
       <SafeAreaView style={CommonStyles.container}>
         <KeyboardAwareScrollView style={styles.container}>
