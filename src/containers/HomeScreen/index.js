@@ -97,7 +97,8 @@ class HomeScreen extends Component {
 
   onStop = async () => {
     if (!this.state.recording) {
-      console.warn('Can\'t stop, not recording!');
+      console.info('Can\'t stop, not recording!');
+      showAlert('Kuto', `Please press the 'start' button to record the audio.`);
       return;
     }
 
@@ -158,7 +159,7 @@ class HomeScreen extends Component {
         console.info('e upload', e);
       }
     } else {
-      showAlert(`Kuto', 'Sorry, file is not ready to be uploaded. Please press the 'end' button first.`);
+      showAlert('Kuto', `Sorry, file is not ready to be uploaded. Please press the 'end' button first.`);
     }
   }
 
