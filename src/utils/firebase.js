@@ -64,13 +64,16 @@ export const uploadAudioFile = async (audioUri) => {
 }
 
 export const getAudioInfo = async () => {
+  const uid = User.getMe().uid;
+  const userName = User.getMe().displayName;
+
   try {
-    const querySnapshot = await firestoreAudioRef.where('uid', '==', User.getMe().uid).get();
+    const querySnapshot = await firestoreAudioRef.doc(`${userName}-${uid}`).get();
     console.info('querySnapshot', querySnapshot);
-    if (querySnapshot.docs.length === 1) {
+    if (querySnapshot.exists) {
       return {
-        data: querySnapshot.docs[0].data(),
-        ref: querySnapshot.docs[0].ref
+        data: querySnapshot.data(),
+        ref: querySnapshot.ref
       };
     } else {
       return null;
@@ -98,7 +101,7 @@ export const updateAudioInfo = async (audioRef, currentAudios, duration, restaur
   audios.push(audio);
 
   try {
-    await firestoreAudioRef.doc(`${userName}-${uid}`).update({ audios, updatedTime: currentTime });
+    await firestoreAudioRef.doc(`${userName}-${uid}`).update({ audios, updatedTime: currentTime, uid });
     return ({ success: true });
   } catch (e) {
     console.info('e updateAudioInfo', e);
