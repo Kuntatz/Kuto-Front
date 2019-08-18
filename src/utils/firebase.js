@@ -1,5 +1,5 @@
 import firebase from 'react-native-firebase';
-import uuid from 'uuid/v1';
+import _ from 'lodash';
 import { get } from 'lodash';
 import { User } from '../utils';
 
@@ -38,7 +38,7 @@ export const getIdToken = async() => {
 export const uploadAudioFile = async (audioUri) => {
   const name = User.getMe().displayName;
   const now = new Date();
-  const timeStr = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+  const timeStr = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
   const filename = `${name}-${timeStr}.aac`;
   return new Promise((resolve, reject) => {
     firebase
@@ -94,7 +94,8 @@ export const updateAudioInfo = async (audioRef, currentAudios, duration, restaur
     time: currentTime,
     fileName: `${userName}-${timeStr}.aac`
   }
-  const audios = [...currentAudios, audio];
+  const audios = _.cloneDeep(currentAudios);
+  audios.push(audio);
 
   try {
     await firestoreAudioRef.doc(`${userName}-${uid}`).update({ audios, updatedTime: currentTime });
