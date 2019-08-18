@@ -37,8 +37,9 @@ export const getIdToken = async() => {
 
 export const uploadAudioFile = async (audioUri) => {
   const name = User.getMe().displayName;
-  const time = new Date();
-  const filename = `${name}-${time.getTime()}.aac`;
+  const now = new Date();
+  const timeStr = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+  const filename = `${name}-${timeStr}.aac`;
   return new Promise((resolve, reject) => {
     firebase
     .storage()
@@ -50,12 +51,13 @@ export const uploadAudioFile = async (audioUri) => {
         console.info('progress', (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         if (snapshot.state === firebase.storage.TaskState.SUCCESS) {
           console.info('snapshot.downloadURL', snapshot.downloadURL);
-          resolve(snapshot.downloadURL);
+          resolve({ audioURL: snapshot.downloadURL, timeStr });
         }
       },
       error => {
         // alert('Sorry, Try again.');
-        reject(error);
+        console.info('err uploadAudioFile', error);
+        resolve(null);
       }
     );
   });
@@ -67,7 +69,7 @@ export const getAudioInfo = async () => {
     console.info('querySnapshot', querySnapshot);
     if (querySnapshot.docs.length === 1) {
       return {
-        data: querySnapshot.docs[0].data(), 
+        data: querySnapshot.docs[0].data(),
         ref: querySnapshot.docs[0].ref
       };
     } else {
@@ -79,18 +81,23 @@ export const getAudioInfo = async () => {
   }
 }
 
-export const updateAudioInfo = async (audioRef, currentAudios, duration, restaurants, audioURL) => {
+export const updateAudioInfo = async (audioRef, currentAudios, duration, restaurants, audioURL, timeStr) => {
   const currentTime = new Date();
+  const uid = User.getMe().uid;
+  const userName = User.getMe().displayName;
+
   const audio = {
     duration,
     audioURL,
     duration,
     restaurants,
-    time: currentTime
+    time: currentTime,
+    fileName: `${userName}-${timeStr}.aac`
   }
   const audios = [...currentAudios, audio];
+
   try {
-    await audioRef.update({ audios, updatedTime: currentTime });
+    await firestoreAudioRef.doc(`${userName}-${uid}`).update({ audios, updatedTime: currentTime });
     return ({ success: true });
   } catch (e) {
     console.info('e updateAudioInfo', e);
@@ -98,7 +105,7 @@ export const updateAudioInfo = async (audioRef, currentAudios, duration, restaur
   }
 }
 
-export const setAudioInfo = async (duration, restaurants, audioURL) => {
+export const setAudioInfo = async (duration, restaurants, audioURL, timeStr) => {
   const uid = User.getMe().uid;
   const userName = User.getMe().displayName;
   const userEmail = User.getMe().email;
@@ -108,18 +115,18 @@ export const setAudioInfo = async (duration, restaurants, audioURL) => {
     audioURL,
     duration,
     restaurants,
-    time: currentTime
+    time: currentTime,
+    fileName: `${userName}-${timeStr}.aac`
   }];
 
   try {
-    const res = await firestoreAudioRef.doc(`${userName}-${currentTime.getTime()}`).set({
+    const res = await firestoreAudioRef.doc(`${userName}-${uid}`).set({
       uid,
       userName,
       userEmail,
       audios,
       updatedTime: currentTime
     });
-    debugger;
     return { success: true };
   } catch (e) {
     console.info('e setAudioInfo', e);
