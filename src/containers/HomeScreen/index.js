@@ -158,7 +158,7 @@ class HomeScreen extends Component {
         console.info('e upload', e);
       }
     } else {
-      showAlert('Kuto', 'Sorry, it is not ready to upload');
+      showAlert(`Kuto', 'Sorry, file is not ready to be uploaded. Please press the 'end' button first.`);
     }
   }
 
