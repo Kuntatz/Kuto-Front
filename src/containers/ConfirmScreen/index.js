@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SplashScreen from 'react-native-splash-screen';
 import _ from 'lodash';
 import { styles } from './styles';
-import { CommonStyles } from '../../themes';
+import { CommonStyles, Color } from '../../themes';
 import { FirebaseUtils, User, showAlert } from '../../utils';
 
 class ConfirmScreen extends Component {
@@ -19,7 +19,8 @@ class ConfirmScreen extends Component {
         { restaurantName: null, promoCode: null },
         { restaurantName: null, promoCode: null },
         { restaurantName: null, promoCode: null }
-      ]
+      ],
+      showActivitiy: false
     }
   }
 
@@ -53,9 +54,17 @@ class ConfirmScreen extends Component {
     const { inputFields } = this.state;
     const { navigation } = this.props;
     const res = this.validateFields();
+    this.setState({ showActivitiy: true });
     if (res.isValid) {
       if (User.getMe()) {
-        const audioURL = await FirebaseUtils.uploadAudioFile(navigation.state.params.audioPath);
+        const audio = await FirebaseUtils.uploadAudioFile(navigation.state.params.audioPath);
+        console.info('audio uploadAudioFile', audio);
+        if (!audio) {
+          showAlert('Kuto', 'Failure to upload.', () => {
+            this.setState({ showActivitiy: false });
+          });
+          return;
+        }
         const audioInfo = await FirebaseUtils.getAudioInfo();
         if (audioInfo) {
           const result = await FirebaseUtils.updateAudioInfo(
@@ -63,36 +72,44 @@ class ConfirmScreen extends Component {
             audioInfo.data.audios,
             navigation.state.params.duration,
             res.fields,
-            audioURL
+            audio.audioURL,
+            audio.timeStr
           );
           console.info('result', result);
-          debugger;
           if (result.success) {
             showAlert('Kuto', 'Successfully uploaded.', () => {
+              this.setState({ showActivitiy: false });
               this.props.navigation.goBack();
             });
           } else {
-            showAlert('Kuto', 'Failure to upload. please try again later.');
+            showAlert('Kuto', 'Failure to upload. please try again later.', () => {
+              this.setState({ showActivitiy: false });
+            });
           }
         } else {
           const result = await FirebaseUtils.setAudioInfo(
             navigation.state.params.duration,
             res.fields,
-            audioURL
+            audio.audioURL,
+            audio.timeStr
           );
           console.info('result', result);
-          debugger;
           if (result.success) {
             showAlert('Kuto', 'Successfully uploaded.', () => {
+              this.setState({ showActivitiy: false });
               this.props.navigation.goBack();
             });
           } else {
-            showAlert('Kuto', 'Failure to upload. please try again later.');
+            showAlert('Kuto', 'Failure to upload. please try again later.', () => {
+              this.setState({ showActivitiy: false });
+            });
           }
         }
       }
     } else {
-      showAlert('Kuto', 'Please fill the empty fields.');
+      showAlert('Kuto', 'Please fill the empty fields.', () => {
+        this.setState({ showActivitiy: false });
+      });
     }
   }
 
@@ -131,8 +148,20 @@ class ConfirmScreen extends Component {
     );
   };
 
+  renderActivity = () => {
+    const { showActivitiy } = this.state;
+    if (showActivitiy) {
+      return (
+        <View style={styles.activityContainer}>
+          <ActivityIndicator size="large" color={Color.gray}/>
+        </View>
+      );
+    }
+    return <View />;
+  };
+
   render() {
-    const { addedIndex } = this.state;
+    const { addedIndex, showActivitiy } = this.state;
     return (
       <SafeAreaView style={CommonStyles.container}>
         <KeyboardAwareScrollView style={styles.container}>
@@ -155,6 +184,7 @@ class ConfirmScreen extends Component {
             </Text>
           </TouchableOpacity>
         </View>
+        {this.renderActivity()}
       </SafeAreaView>
     );
   }
