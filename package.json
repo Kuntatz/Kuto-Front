@@ -10,7 +10,7 @@
   "dependencies": {
     "react": "16.8.6",
     "react-native": "0.60.4",
-    "react-native-audio": "git+https://github.com/seriousStar/react-native-audio.git#24e3018119e1c18d50494305eaf2a83df465a953",
+    "react-native-audio": "git+https://github.com/seriousStar/react-native-audio.git#507dbbd2a478a8edd462e79bf64a1b812514506b",
     "react-native-firebase": "~5.5.6",
     "react-native-gesture-handler": "^1.3.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
