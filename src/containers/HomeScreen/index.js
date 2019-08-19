@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-navigation';
 import { Text, Image, TouchableOpacity, View, Platform } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
+import uuidv1 from 'uuid/v1';
 import { styles } from './styles';
 import { CommonStyles } from '../../themes';
 import { User, showAlert, FirebaseUtils } from '../../utils';
@@ -12,7 +13,8 @@ class HomeScreen extends Component {
     super(props);
     this.state = {
       hasPermission: undefined,
-      audioPath: AudioUtils.DocumentDirectoryPath + '/test.aac',
+      // audioPath: AudioUtils.DocumentDirectoryPath + '/test.aac',
+      audioPath: `${AudioUtils.DocumentDirectoryPath}/${uuidv1()}.aac`,
       currentTime: 0.0,
       recording: false,
       stoppedRecording: false,
@@ -51,7 +53,10 @@ class HomeScreen extends Component {
       stoppedRecording: false,
       finished: false,
       paused: false,
-      completed: false
+      completed: false,
+      audioPath: `${AudioUtils.DocumentDirectoryPath}/${uuidv1()}.aac`,
+    }, () => {
+      this.prepareRecordingPath(this.state.audioPath);
     });
   };
 
@@ -111,7 +116,7 @@ class HomeScreen extends Component {
 
     try {
       const filePath = await AudioRecorder.stopRecording();
-      console.info(AudioUtils.DocumentDirectoryPath + '/test.aac');
+      console.info(filePath);
       if (Platform.OS === 'android') {
         this._finishRecording(true, filePath);
       }
