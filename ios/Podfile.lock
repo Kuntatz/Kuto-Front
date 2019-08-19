@@ -208,7 +208,7 @@ PODS:
   - React-RCTWebSocket (0.60.4):
     - React-Core (= 0.60.4)
     - React-fishhook (= 0.60.4)
-  - RNAudio (4.3.0):
+  - RNAudio (4.2.2):
     - React
   - RNFirebase (5.5.6):
     - Firebase/Core
@@ -388,7 +388,7 @@ SPEC CHECKSUMS:
   React-RCTText: e0f224898b13af9aa036ea7cb3d438daa68c1044
   React-RCTVibration: 0bea40cd51bd089bd591a8f74c86e91fdf2666c5
   React-RCTWebSocket: 163873f4cdd5f1058a9483443404fc3801581cb6
-  RNAudio: cae2991f2dccb75163f260b60da8051717b959fa
+  RNAudio: 33271029ffc003b20c6d7bacddc26a6cc74c38ac
   RNFirebase: ac0de8b24c6f91ae9459575491ed6a77327619c6
   RNGestureHandler: 5329a942fce3d41c68b84c2c2276ce06a696d8b0
   RNReanimated: 1b52415c4302f198cb581282a0166690bad62c43
