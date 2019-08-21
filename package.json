@@ -16,6 +16,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-reanimated": "^1.2.0",
     "react-native-splash-screen": "^3.2.0",
+    "react-native-webview": "^6.3.1",
     "react-navigation": "^3.11.1",
     "uuid": "^3.3.2"
   },
