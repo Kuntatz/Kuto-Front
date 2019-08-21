@@ -8,11 +8,13 @@ import { Platform } from 'react-native';
 import {
   LoginScreen,
   HomeScreen,
-  ConfirmScreen
+  ConfirmScreen,
+  SignupScreen
 } from './containers';
 
 const AuthStack = createStackNavigator({
-  LoginScreen: LoginScreen
+  LoginScreen: LoginScreen,
+  SignupScreen: SignupScreen
 }, {
   initialRouteName: 'LoginScreen',
   headerMode: 'none'

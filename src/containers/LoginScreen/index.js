@@ -9,7 +9,8 @@ import {
   Image,
   TextInput,
   Keyboard,
-  Linking
+  Linking,
+  Platform
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen'
 import { styles } from './styles';
@@ -61,6 +62,10 @@ class LoginScreen extends Component {
 
   onCreateAccount = async() => {
     Keyboard.dismiss();
+    if (Platform.OS === 'ios') {
+      this.props.navigation.navigate('SignupScreen');
+      return;
+    }
     const url = 'https://kuto.co/drivers/#join';
     const isSupported = await Linking.canOpenURL(url);
     if (isSupported) {
