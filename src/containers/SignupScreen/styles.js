@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 20
   },
   closeIconContainer: {
     width: 40,
@@ -48,6 +49,15 @@ export const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: Color.purple
+  },
+  bottomContainer: {
+    position: 'absolute',
+    right: 0,
+    left: 0,
+    bottom: 0,
+    height: 100,
+    backgroundColor: Color.purple
   }
 });

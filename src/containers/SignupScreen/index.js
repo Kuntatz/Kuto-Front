@@ -44,7 +44,7 @@ class SignupScreen extends Component {
 
   render() {
     return (
-      <SafeAreaView style={CommonStyles.container}>
+      <SafeAreaView style={CommonStyles.container} forceInset={{ bottom: 'never' }}>
         <View style={styles.headerContainer}>
           <TouchableOpacity style={styles.closeIconContainer} onPress={this.onClose}>
             <Image source={require('../../assets/icon_close.png')} style={styles.iconClose}/>
